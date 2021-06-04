@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-discbot-deploy
+  labels:
+    app: go-discbot-app
+spec:
+  selector:
+    matchLabels:
+      app: go-discbot-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: go-discbot-app
+    spec:
+      containers:
+      - name: go-discbot-app
+        image: docker.io/project/bot:1.0.1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        
